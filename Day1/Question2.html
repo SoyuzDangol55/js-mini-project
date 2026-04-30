@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even/Odd Checker</title>
+</head>
+<body>
+    <h1 id="display"></h1>
+    <input id = "value" placeholder="Enter the value to check even/odd"></textarea>
+    <br>
+    <button id="check">Click me</button>
+
+    <script>
+        
+        const btn = document.getElementById('check');
+        let dis = document.getElementById('display');
+
+        btn.addEventListener('click',function(){
+            let num = document.getElementById('value').value;
+            if(num%2==0){
+                dis.textContent="Even Number";
+            }else{
+                dis.textContent="odd number";
+        }
+    });
+        </script>
+</body>
+</html>
