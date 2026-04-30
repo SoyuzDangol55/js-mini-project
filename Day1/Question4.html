@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+</head>
+<body>
+    <h1 id="value"></h1>
+    <input type="number" id="number" placeholder="Enter Temperature">
+    <button id="ctf">Celsius to Fahrenheit</button>
+    <button id="ctk">Celsius to Kelvin</button>
+    <button id="ftc">Fahrenheit to Celsius</button>
+    <button id="ftk">Fahrenheit to Kelvin</button>
+    <button id="ktc">Kelvin to Celsius</button>
+    <button id="ktf">Kelvin to Fahrenheit</button>
+
+    <script>
+        const display = document.getElementById('value');
+        const number = document.getElementById('number');
+        const btn = document.querySelectorAll('button');
+
+        btn.forEach(element => {
+            element.addEventListener('click', function() {
+                let temp = parseFloat(number.value);  // read & convert inside handler
+
+                if (isNaN(temp)) {
+                    display.textContent = "Please enter a valid number";
+                    return;
+                }
+
+                switch(element.id) {
+                    case 'ctf':
+                        display.textContent = (temp * 9/5) + 32 + " °F";
+                        break;
+
+                    case 'ctk':
+                        display.textContent = temp + 273.15 + " K";
+                        break;
+
+                    case 'ftc':
+                        display.textContent = (temp - 32) * 5/9 + " °C";
+                        break;
+
+                    case 'ftk':
+                        display.textContent = (temp - 32) * 5/9 + 273.15 + " K";
+                        break;
+
+                    case 'ktc':
+                        display.textContent = temp - 273.15 + " °C";
+                        break;
+
+                    case 'ktf':
+                        display.textContent = (temp - 273.15) * 9/5 + 32 + " °F";
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
