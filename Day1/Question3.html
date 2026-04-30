@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <h1 id="value"></h1>
+    <input type="number" id="no" placeholder="Enter Number">
+    <button id="multiply">Multiply</button>
+    <button id="Divide">Divide</button>
+    <button id="Add">Add</button>
+    <button id="Subtract">Subtract</button>
+    <button id="Percentage">Percentage</button>
+
+    <script>
+        const result = document.getElementById('value');  // <h1> element
+        const value = document.getElementById('no');       // input element
+        const btn = document.querySelectorAll('button');
+
+        btn.forEach(element => {
+            element.addEventListener('click', function() {
+                let num = parseFloat(value.value);  // read & convert input INSIDE handler
+
+                if (isNaN(num)) {
+                    result.textContent = "Please enter a valid number";
+                    return;
+                }
+
+                switch(element.id) {
+                    case 'multiply':
+                        result.textContent = num * 2;
+                        break;
+
+                    case 'Divide':
+                        result.textContent = num / 2;
+                        break;
+
+                    case 'Add':
+                        result.textContent = num + 10;
+                        break;
+
+                    case 'Subtract':
+                        result.textContent = num - 5;
+                        break;
+
+                    case 'Percentage':
+                        result.textContent = num / 100;
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
