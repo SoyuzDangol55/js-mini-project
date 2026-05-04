@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<body>
+    <h1 id="clock"></h1>
+    <script>
+        const clock = document.getElementById('clock');
+
+        function updateClock(){
+            let now = new Date();
+
+            let hours = now.getHours();
+            if(hours < 10) {
+            hours = '0' + hours;
+             }
+            
+             let min = now.getMinutes();
+             if(min<10) {
+                min = '0'+min;
+             }
+
+             let sec = now.getSeconds();
+
+             if(sec<10){
+                sec = '0'+sec;
+             }
+
+             clock.textContent = hours+":"+min+":"+sec;    
+        }
+             setInterval(updateClock, 1000);
+             updateClock(); 
+        </script>
+</body>
+</html>
