@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Validation</title>
 </head>
+
 <body>
     <h1>Registration Form</h1>
 
@@ -37,43 +39,43 @@
         let display = document.getElementById('display');
 
         // regex patterns
-        let nameRegex     = /^[a-zA-Z ]+$/;
-        let emailRegex    = /^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+        let nameRegex = /^[a-zA-Z ]+$/;
+        let emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
         let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
-        let genderRegex   = /^(Male|Female|Other)$/;
+        let genderRegex = /^(Male|Female|Other)$/;
 
-        btn.addEventListener('click', function() {
-            let name   = document.getElementById('name').value;
-            let email  = document.getElementById('email').value;
-            let pass   = document.getElementById('password').value;
+        btn.addEventListener('click', function () {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let pass = document.getElementById('password').value;
             let gender = document.getElementById('gender').value;
 
             // empty field check
-            if(name === '' || email === '' || pass === '' || gender === '') {
+            if (name === '' || email === '' || pass === '' || gender === '') {
                 display.textContent = "Please fill all fields!";
                 return;
             }
 
             // name validation
-            if(!nameRegex.test(name)) {
+            if (!nameRegex.test(name)) {
                 display.textContent = "Name can only contain letters!";
                 return;
             }
 
             // email validation
-            if(!emailRegex.test(email)) {
+            if (!emailRegex.test(email)) {
                 display.textContent = "Enter a valid email!";
                 return;
             }
 
             // password validation
-            if(!passwordRegex.test(pass)) {
+            if (!passwordRegex.test(pass)) {
                 display.textContent = "Password must have uppercase, lowercase, number and special character and at least 8 characters!";
                 return;
             }
 
             // gender validation
-            if(!genderRegex.test(gender)) {
+            if (!genderRegex.test(gender)) {
                 display.textContent = "Please select a valid gender!";
                 return;
             }
@@ -83,4 +85,5 @@
         });
     </script>
 </body>
+
 </html>
