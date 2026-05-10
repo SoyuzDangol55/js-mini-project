@@ -1,92 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Todo CRUD App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Simple Todo App</title>
 
-  
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            background:white;
+            width:400px;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-bottom:10px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            background:blue;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+
+        button:hover{
+            background:darkblue;
+        }
+
+        #Error{
+            display:block;
+            margin-bottom:10px;
+            font-size:14px;
+        }
+
+        ul{
+            list-style:none;
+            margin-top:20px;
+        }
+
+        li{
+            background:#eee;
+            padding:10px;
+            margin-bottom:10px;
+            border-radius:5px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .delete-btn{
+            background:red;
+            width:auto;
+            padding:5px 10px;
+        }
+
+    </style>
+
 </head>
 <body>
 
-  <div class="container">
-    <h1>Todo CRUD App</h1>
+    <div class="container">
 
-    <div class="input-group">
-      <input type="text" id="todoInput" placeholder="Enter task">
-      <button onclick="addTodo()">Add</button>
+        <h1>Todo List App</h1>
+
+        <input type="text" id="words" placeholder="Enter your task">
+
+        <span id="Error"></span>
+
+        <button id="submit">Add Task</button>
+
+        <ul id="taskList"></ul>
+
     </div>
 
-    <ul id="todoList"></ul>
-  </div>
+    <script>
 
-  <script>
-    let todos = [];
-    let editIndex = -1;
+        const task = document.getElementById('words');
+        const error = document.getElementById('Error');
+        const btn = document.getElementById('submit');
+        const taskList = document.getElementById('taskList');
 
-    function addTodo() {
-      const input = document.getElementById("todoInput");
-      const task = input.value.trim();
+        btn.addEventListener('click', function(){
 
-      if(task === ""){
-        alert("Please enter a task");
-        return;
-      }
+            const finaltask = task.value.trim();
 
-      if(editIndex === -1){
-        // CREATE
-        todos.push(task);
-      } else {
-        // UPDATE
-        todos[editIndex] = task;
-        editIndex = -1;
-      }
+            // Validation
+            if(finaltask === ""){
 
-      input.value = "";
-      displayTodos();
-    }
+                error.textContent = "Please Enter Your Task";
+                error.style.color = "red";
 
-    function displayTodos() {
-      const todoList = document.getElementById("todoList");
-      todoList.innerHTML = "";
+                return;
+            }
 
-      // READ
-      todos.forEach((todo, index) => {
+            // Remove error message
+            error.textContent = "";
 
-        const li = document.createElement("li");
+            // Create li
+            const li = document.createElement('li');
 
-        li.innerHTML = `
-          <span>${todo}</span>
+            li.textContent = finaltask;
 
-          <div class="actions">
-            <button class="edit" onclick="editTodo(${index})">
-              Edit
-            </button>
+            // Create delete button
+            const deleteBtn = document.createElement('button');
 
-            <button class="delete" onclick="deleteTodo(${index})">
-              Delete
-            </button>
-          </div>
-        `;
+            deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add('delete-btn');
 
-        todoList.appendChild(li);
-      });
-    }
+            // Delete task
+            deleteBtn.addEventListener('click', function(){
 
-    function editTodo(index){
-      const input = document.getElementById("todoInput");
+                li.remove();
 
-      input.value = todos[index];
-      editIndex = index;
-    }
+            });
 
-    function deleteTodo(index){
-      // DELETE
-      todos.splice(index, 1);
+            // Add button inside li
+            li.appendChild(deleteBtn);
 
-      displayTodos();
-    }
-  </script>
+            // Add li to ul
+            taskList.appendChild(li);
+
+            // Clear input
+            task.value = "";
+
+        });
+
+    </script>
 
 </body>
 </html>
