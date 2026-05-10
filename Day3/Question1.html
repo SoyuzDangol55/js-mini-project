@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Todo CRUD App</title>
+
+  
+</head>
+<body>
+
+  <div class="container">
+    <h1>Todo CRUD App</h1>
+
+    <div class="input-group">
+      <input type="text" id="todoInput" placeholder="Enter task">
+      <button onclick="addTodo()">Add</button>
+    </div>
+
+    <ul id="todoList"></ul>
+  </div>
+
+  <script>
+    let todos = [];
+    let editIndex = -1;
+
+    function addTodo() {
+      const input = document.getElementById("todoInput");
+      const task = input.value.trim();
+
+      if(task === ""){
+        alert("Please enter a task");
+        return;
+      }
+
+      if(editIndex === -1){
+        // CREATE
+        todos.push(task);
+      } else {
+        // UPDATE
+        todos[editIndex] = task;
+        editIndex = -1;
+      }
+
+      input.value = "";
+      displayTodos();
+    }
+
+    function displayTodos() {
+      const todoList = document.getElementById("todoList");
+      todoList.innerHTML = "";
+
+      // READ
+      todos.forEach((todo, index) => {
+
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+          <span>${todo}</span>
+
+          <div class="actions">
+            <button class="edit" onclick="editTodo(${index})">
+              Edit
+            </button>
+
+            <button class="delete" onclick="deleteTodo(${index})">
+              Delete
+            </button>
+          </div>
+        `;
+
+        todoList.appendChild(li);
+      });
+    }
+
+    function editTodo(index){
+      const input = document.getElementById("todoInput");
+
+      input.value = todos[index];
+      editIndex = index;
+    }
+
+    function deleteTodo(index){
+      // DELETE
+      todos.splice(index, 1);
+
+      displayTodos();
+    }
+  </script>
+
+</body>
+</html>
